@@ -9,5 +9,9 @@
         <module name="zookeeper-sample" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="big-data" target="1.8" />
+      <module name="zookeeper-sample" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
