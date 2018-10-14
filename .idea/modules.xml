@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/big-data.iml" filepath="$PROJECT_DIR$/.idea/big-data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/big-data.iml" filepath="$PROJECT_DIR$/big-data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zookeeper-sample/zookeeper-sample.iml" filepath="$PROJECT_DIR$/zookeeper-sample/zookeeper-sample.iml" />
     </modules>
   </component>
 </project>
