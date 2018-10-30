@@ -25,7 +25,8 @@ public class LockingExample {
             for (int i = 0; i < QTY; i++) {
                 final int index = i;
                 Callable<Void> task = () -> {
-                    CuratorFramework client = CuratorFrameworkFactory.newClient(server.getConnectString(), new ExponentialBackoffRetry(1000, 3));
+                    CuratorFramework client = CuratorFrameworkFactory.newClient(server.getConnectString(),
+                            new ExponentialBackoffRetry(1000, 3));
                     try {
                         client.start();
                         LockingClient example = new LockingClient(client, PATH, resource, "Client " + index);

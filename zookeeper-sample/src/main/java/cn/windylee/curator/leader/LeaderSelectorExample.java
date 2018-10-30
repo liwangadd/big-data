@@ -15,7 +15,7 @@ import java.util.List;
 
 public class LeaderSelectorExample {
 
-    private static final int CLIENT_QTY=10;
+    private static final int CLIENT_QTY = 10;
     private static final String PATH = "/windylee/leader";
 
     private static final Logger log = LoggerFactory.getLogger(LeaderSelectorExample.class);
@@ -30,7 +30,7 @@ public class LeaderSelectorExample {
 
         TestingServer server = new TestingServer();
 
-        try{
+        try {
             for (int i = 0; i < CLIENT_QTY; i++) {
                 CuratorFramework client = CuratorFrameworkFactory.newClient(server.getConnectString(), new ExponentialBackoffRetry(1000, 3));
                 clients.add(client);
@@ -44,7 +44,7 @@ public class LeaderSelectorExample {
 
             log.info("Press enter/return to quit");
             new BufferedReader(new InputStreamReader(System.in)).readLine();
-        }finally {
+        } finally {
             log.info("Shutting down...");
             for (ClientExample clientExample : examples) {
                 CloseableUtils.closeQuietly(clientExample);

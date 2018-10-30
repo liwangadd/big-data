@@ -36,10 +36,10 @@ public class ClientExample extends LeaderSelectorListenerAdapter implements Clos
         log.info(name + " has bean leader " + leaderCount.getAndIncrement() + " time(s) before");
         try {
             Thread.sleep(TimeUnit.SECONDS.toMillis(waitSeconds));
-        }catch (InterruptedException e){
+        } catch (InterruptedException e) {
             log.error(name + " was interrupted");
             Thread.currentThread().interrupt();
-        }finally {
+        } finally {
             log.info(name + " relinquishing leadership");
         }
 

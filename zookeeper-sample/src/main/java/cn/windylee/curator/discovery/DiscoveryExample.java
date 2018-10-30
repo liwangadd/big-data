@@ -1,6 +1,5 @@
 package cn.windylee.curator.discovery;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.curator.framework.CuratorFramework;
@@ -143,12 +142,7 @@ public class DiscoveryExample {
         }
 
         final String serviceName = args[0];
-        DiscoveryServer server = Iterables.find
-                (
-                        servers,
-                        server1 -> server1.getThisInstance().getName().endsWith(serviceName),
-                        null
-                );
+        DiscoveryServer server = servers.stream().filter(server1 -> server1.getThisInstance().getName().endsWith(serviceName)).findFirst().orElse(null);
         if (server == null) {
             System.err.println("No servers found named: " + serviceName);
             return;
