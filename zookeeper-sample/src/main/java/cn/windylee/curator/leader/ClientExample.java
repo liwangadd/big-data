@@ -30,7 +30,7 @@ public class ClientExample extends LeaderSelectorListenerAdapter implements Clos
     }
 
     @Override
-    public void takeLeadership(CuratorFramework curatorFramework) throws Exception {
+    public void takeLeadership(CuratorFramework curatorFramework) {
         final int waitSeconds = (int) (5 * Math.random() + 1);
         log.info(name + " is now the leader. Waiting " + waitSeconds + " seconds...");
         log.info(name + " has bean leader " + leaderCount.getAndIncrement() + " time(s) before");
@@ -46,7 +46,7 @@ public class ClientExample extends LeaderSelectorListenerAdapter implements Clos
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() {
         leaderSelector.close();
     }
 }
