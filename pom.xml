@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>zookeeper-sample</module>
+        <module>netty-sample</module>
     </modules>
 
     <properties>
