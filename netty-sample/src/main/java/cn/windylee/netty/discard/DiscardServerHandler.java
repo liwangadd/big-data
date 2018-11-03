@@ -18,8 +18,8 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter {
         logger.info(in.toString(CharsetUtil.US_ASCII));
 
         //将消息通过ctx写入之后，会自动释放msg，因此不用调用release方法
-        ctx.write(msg);
-        ctx.flush();
+//        ctx.write(msg);
+//        ctx.flush();
 //        } finally {
 //            ReferenceCountUtil.release(msg);
 //        }
