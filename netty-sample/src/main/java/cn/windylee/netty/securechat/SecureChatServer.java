@@ -1,7 +1,6 @@
-package cn.windylee.netty.http.websocketx.server;
+package cn.windylee.netty.securechat;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.Channel;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -11,20 +10,14 @@ import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.SelfSignedCertificate;
 
-public class WebSocketServer {
+public class SecureChatServer {
 
-    static final boolean SSL = System.getProperty("ssl") != null;
-    static final int PORT = Integer.parseInt(System.getProperty("port", SSL ? "8443" : "8080"));
+    static final int PORT = Integer.parseInt(System.getProperty("port", "8992"));
 
     public static void main(String[] args) throws Exception {
-        // Configure SSL.
-        final SslContext sslCtx;
-        if (SSL) {
-            SelfSignedCertificate ssc = new SelfSignedCertificate();
-            sslCtx = SslContextBuilder.forServer(ssc.certificate(), ssc.privateKey()).build();
-        } else {
-            sslCtx = null;
-        }
+        SelfSignedCertificate ssc = new SelfSignedCertificate();
+        SslContext sslCtx = SslContextBuilder.forServer(ssc.certificate(), ssc.privateKey())
+                .build();
 
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
@@ -33,14 +26,9 @@ public class WebSocketServer {
             b.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.INFO))
-                    .childHandler(new WebSocketServerInitializer(sslCtx));
+                    .childHandler(new SecureChatServerInitializer(sslCtx));
 
-            Channel ch = b.bind(PORT).sync().channel();
-
-            System.out.println("Open your web browser and navigate to " +
-                    (SSL ? "https" : "http") + "://127.0.0.1:" + PORT + '/');
-
-            ch.closeFuture().sync();
+            b.bind(PORT).sync().channel().closeFuture().sync();
         } finally {
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
