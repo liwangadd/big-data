@@ -45,9 +45,13 @@ public class FileServer {
                             if (sslCtx != null) p.addLast(sslCtx.newHandler(ch.alloc()));
 
                             p.addLast(
+//                                    将UTF-8编码的字符串编码为ByteBuf
                                     new StringEncoder(CharsetUtil.UTF_8),
+//                                    将ByteBuf类型按'\n'或'\r\n'进行切分
                                     new LineBasedFrameDecoder(8192),
+//                                    将ByteBuf数据解码为UTF-8编码的字符串
                                     new StringDecoder(CharsetUtil.UTF_8),
+//                                    将发送的内容缓存起来，一次性发送
                                     new ChunkedWriteHandler(),
                                     new FileServerHandler()
                             );

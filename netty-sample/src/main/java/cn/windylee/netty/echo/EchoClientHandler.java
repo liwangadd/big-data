@@ -16,19 +16,21 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
     }
 
     @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+    public void channelActive(ChannelHandlerContext ctx) {
         ctx.writeAndFlush(firstMessage);
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    public void channelRead(ChannelHandlerContext ctx, Object msg) {
         ByteBuf sb = (ByteBuf) msg;
+//        使用UTF8编码将字节数据转换为字符串
         System.out.println(sb.toString(CharsetUtil.UTF_8));
         ctx.write(msg);
     }
 
     @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+    public void channelReadComplete(ChannelHandlerContext ctx) {
+//        读取完数据之后调用flush函数将写入到缓冲区中的数据刷新到网络中
         ctx.flush();
     }
 

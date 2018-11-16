@@ -31,6 +31,9 @@ public class DiscardServer {
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
             ServerBootstrap bootstrap = new ServerBootstrap();
+//            需要两种线程
+//            boss线程用于接受客户端连接
+//            worker线程用于处理连接上的读写事件
             bootstrap.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler())

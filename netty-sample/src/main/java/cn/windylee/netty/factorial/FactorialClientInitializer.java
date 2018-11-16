@@ -20,7 +20,9 @@ public class FactorialClientInitializer extends ChannelInitializer<SocketChannel
         ChannelPipeline pipeline = ch.pipeline();
         if (sslCtx != null) pipeline.addLast(sslCtx.newHandler(ch.alloc(), FactorialClient.HOST, FactorialClient.PORT));
 
+//        对传输数据进行压缩
         pipeline.addLast(ZlibCodecFactory.newZlibEncoder(ZlibWrapper.GZIP));
+//        对接收数据进行解压
         pipeline.addLast(ZlibCodecFactory.newZlibDecoder(ZlibWrapper.GZIP));
 
         pipeline.addLast(new BigIntegerDecoder());

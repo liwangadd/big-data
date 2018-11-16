@@ -32,8 +32,8 @@ public class DiscardClient {
         EventLoopGroup group = new NioEventLoopGroup();
         try {
             Bootstrap b = new Bootstrap();
-            b.group(group)
-                    .channel(NioSocketChannel.class)
+            b.group(group) //客户端只需要一个线程进行网络通信
+                    .channel(NioSocketChannel.class) //使用NIO作为底层通信方式
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
@@ -41,16 +41,19 @@ public class DiscardClient {
                             if (sslCtx != null) {
                                 p.addLast(sslCtx.newHandler(ch.alloc(), HOST, PORT));
                             }
-                            p.addLast(new DiscardClientHandler());
+                            p.addLast(new DiscardClientHandler()); //添加自定义Handler，程序逻辑在这里面实现
                         }
                     });
 
-            // Make the connection attempt.
+//            Make the connection attempt.
+//            Netty内部是完全异步的，返回Future作为线程间通信的媒介
             ChannelFuture f = b.connect(HOST, PORT).sync();
 
-            // Wait until the connection is closed.
+//            Wait until the connection is closed.
+//            等待通信结束，防止主线程退出
             f.channel().closeFuture().sync();
         } finally {
+//            一定要关闭线程池
             group.shutdownGracefully();
         }
     }

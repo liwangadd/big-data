@@ -10,6 +10,7 @@ public class DiscardClientHandler extends SimpleChannelInboundHandler {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
+//        建立连接后向Server发送消息
         this.ctx = ctx;
         content = ctx.alloc().directBuffer(DiscardClient.SIZE)
                 .writeZero(DiscardClient.SIZE);
@@ -29,6 +30,7 @@ public class DiscardClientHandler extends SimpleChannelInboundHandler {
     }
 
     private void generateTraffic() {
+//        调用retain方法增加ByteBuf的引用计数
         ctx.writeAndFlush(content.duplicate().retain()).addListener(trafficGenerator);
     }
 
