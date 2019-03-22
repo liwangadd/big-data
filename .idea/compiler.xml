@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="hadoop-sample" />
         <module name="netty-sample" />
+        <module name="spark-sample" />
         <module name="zookeeper-sample" />
       </profile>
     </annotationProcessing>
@@ -15,6 +16,7 @@
       <module name="big-data" target="1.8" />
       <module name="hadoop-sample" target="1.8" />
       <module name="netty-sample" target="1.8" />
+      <module name="spark-sample" target="1.8" />
       <module name="zookeeper-sample" target="1.8" />
     </bytecodeTargetLevel>
   </component>

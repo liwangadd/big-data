@@ -12,6 +12,7 @@
         <module>zookeeper-sample</module>
         <module>netty-sample</module>
         <module>hadoop-sample</module>
+        <module>spark-sample</module>
     </modules>
 
     <properties>

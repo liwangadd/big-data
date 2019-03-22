@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/big-data.iml" filepath="$PROJECT_DIR$/big-data.iml" />
       <module fileurl="file://$PROJECT_DIR$/hadoop-sample/hadoop-sample.iml" filepath="$PROJECT_DIR$/hadoop-sample/hadoop-sample.iml" />
       <module fileurl="file://$PROJECT_DIR$/netty-sample/netty-sample.iml" filepath="$PROJECT_DIR$/netty-sample/netty-sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spark-sample/spark-sample.iml" filepath="$PROJECT_DIR$/spark-sample/spark-sample.iml" />
       <module fileurl="file://$PROJECT_DIR$/zookeeper-sample/zookeeper-sample.iml" filepath="$PROJECT_DIR$/zookeeper-sample/zookeeper-sample.iml" />
     </modules>
   </component>
